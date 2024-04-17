@@ -8,18 +8,12 @@ aliases:
 owner: istio/wg-environments-maintainers
 test: n/a
 ---
+Istio 서비스 메시는 논리적으로 데이터 플레인과 컨트롤 플레인으로 구성됩니다.
 
-An Istio service mesh is logically split into a **data plane** and a **control
-plane**.
+* **데이터 플레인**은 사이드카 형태로 배포된 ([Envoy](https://www.envoyproxy.io/)) 지능형 프록시 세트로 구성되어 있습니다. 이런 프록시들은 마이크로서비스 간의 모든 네트워크 통신을 제어합니다. 또한 모든 메시 트래픽을 수집 및 보고합니다.
+* **컨트롤 플레인**은 프록시의 트래픽 라우팅을 설정하고 관리합니다.
 
-* The **data plane** is composed of a set of intelligent proxies
-  ([Envoy](https://www.envoyproxy.io/)) deployed as sidecars. These proxies
-  mediate and control all network communication between microservices. They
-  also collect and report telemetry on all mesh traffic.
-
-* The **control plane** manages and configures the proxies to route traffic.
-
-The following diagram shows the different components that make up each plane:
+아래 다이어그램이 각 플레인을 구성하는 각기 다른 구성요소를 보여줍니다.
 
 {{< image width="80%"
     link="./arch.svg"
@@ -58,12 +52,11 @@ Envoy 프록시를 통해 지원되는 Istio의 기능은 다음과 같다:
 
 * 네트워크 탄력 기능 : 설정 재시도(setup retries), 재해복구(failovers), 서킷 브레이커와 실패 주입 
 
-* Security and authentication features: enforce security policies and enforce
-  access control and rate limiting defined through the configuration API.
+* 보안 및 인증(authentication) 기능: 보안정책을 적용하고 접근제어 및 configuration API를 통해 정의한 rate limit
 
-* Pluggable extensions model based on WebAssembly that allows for custom policy
-  enforcement and telemetry generation for mesh traffic.
-
+* Pluggable extensions model based on WebAssembly that allows for custom policy enforcement and telemetry generation for mesh traffic.
+* 메시 트래픽에 대한 사용자 정의 정책 시행 및 원격 측정 생성을 허용하는 웹 어샘블리 기반의 플러그형 확장 모델
+  
 ### Istiod
 
 Istiod provides service discovery, configuration and certificate management.
