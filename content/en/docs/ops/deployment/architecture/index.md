@@ -22,8 +22,7 @@ Istio 서비스 메시는 논리적으로 데이터 플레인과 컨트롤 플�
     >}}
 
 ## 구성요소
-
-The following sections provide a brief overview of each of Istio's core components.
+아래 섹션에서 Istio의 핵심 구성요소 별 개요를 확인할 수 있습니다.
 
 ### Envoy
 
@@ -58,21 +57,15 @@ Envoy 프록시를 통해 지원되는 Istio의 기능은 다음과 같다:
 * 메시 트래픽에 대한 사용자 정의 정책 시행 및 원격 측정 생성을 허용하는 웹 어샘블리 기반의 플러그형 확장 모델
   
 ### Istiod
+Istiod는 서비스 디스커버리, 구성 및 인증서 관리를 담당합니다.
 
-Istiod provides service discovery, configuration and certificate management.
+Istiod는 Envoy에서 설정에 따른 트래픽 제어를 통해 높은 수준의 라우팅 규칙을 사용할 수 있으며, 런타임에서 사이드카를 통해 전파합니다. Pilot은 플랫폼 기반의 서비스 디스커버리 매커니즘을 추상화하고, Envoy API가 사용할 수 있도록 기준 형식의 사이드카에 적용할 수 있습니다.
+Istiod converts high level routing rules that control traffic behavior into Envoy-specific configurations, and propagates them to the sidecars at runtime.
+Pilot abstracts platform-specific service discovery mechanisms and synthesizes them into a standard format that any sidecar conforming with the [Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api/api) can consume.
 
-Istiod converts high level routing rules that control traffic behavior into
-Envoy-specific configurations, and propagates them to the sidecars at runtime.
-Pilot abstracts platform-specific service discovery mechanisms and synthesizes
-them into a standard format that any sidecar conforming with the
-[Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api/api) can consume.
+Istio는 쿠버네티스 뿐 아니라 VM등 다양한 환경에서 디스커버리를 지원합니다.
 
-Istio can support discovery for multiple environments such as Kubernetes or VMs.
-
-You can use Istio's
-[Traffic Management API](/docs/concepts/traffic-management/#introducing-istio-traffic-management)
-to instruct Istiod to refine the Envoy configuration to exercise more granular control
-over the traffic in your service mesh.
+Istio의 [Traffic Management API](/docs/concepts/traffic-management/#introducing-istio-traffic-management)를 사용해 Istiod가 Envoy를 통해 서비스 메시의 트래픽을 좀 더 세밀하게 제어할 수 있도록 구성할 수 있습니다.
 
 Istiod [security](/docs/concepts/security/) enables strong service-to-service and
 end-user authentication with built-in identity and credential management. You
